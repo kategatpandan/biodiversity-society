@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Biodiversity Threats & Healthy Society | Science, Technology & Society</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <!-- Floating Elements -->
+    <div class="floating-elements">
+        <div class="floating-element"><i class="fas fa-leaf"></i></div>
+        <div class="floating-element"><i class="fas fa-tree"></i></div>
+        <div class="floating-element"><i class="fas fa-seedling"></i></div>
+        <div class="floating-element"><i class="fas fa-water"></i></div>
+    </div>
+
+    <!-- AI Voice Explanation Button -->
+    <button class="ai-explanation-btn" id="aiExplanationBtn">
+        <i class="fas fa-robot"></i>
+    </button>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- AI Explanation Modal -->
+    <div class="ai-explanation-modal" id="aiExplanationModal">
+        <div class="ai-explanation-content">
+            <div class="ai-explanation-header">
+                <h3>AI Explanation</h3>
+                <button class="close-ai-modal" id="closeAiModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="ai-explanation-body">
+                <div class="ai-section-selector">
+                    <label for="sectionSelect">Select Section to Explain:</label>
+                    <select id="sectionSelect">
+                        <option value="home">Home - Introduction</option>
+                        <option value="key-facts">Key Facts About Biodiversity</option>
+                        <option value="overview">Biodiversity Overview</option>
+                        <option value="threats">Threats to Biodiversity</option>
+                        <option value="impact">Impact of Biodiversity Loss</option>
+                        <option value="health">Global Health Issues</option>
+                        <option value="technology">Technological Advancements</option>
+                        <option value="sts">STS Connection</option>
+                        <option value="videos">Video Resources</option>
+                    </select>
+                </div>
+
+                <div class="ai-voice-container" id="aiVoiceContainer">
+                    <div class="ai-voice-controls">
+                        <button class="ai-voice-btn" id="playVoiceBtn">
+                            <i class="fas fa-play"></i> Play Explanation
+                        </button>
+                        <button class="ai-voice-btn" id="pauseVoiceBtn" disabled>
+                            <i class="fas fa-pause"></i> Pause
+                        </button>
+                        <button class="ai-voice-btn" id="stopVoiceBtn" disabled>
+                            <i class="fas fa-stop"></i> Stop
+                        </button>
+                    </div>
+                    <div class="voice-status" id="voiceStatus" style="display: none;">
+                        <i class="fas fa-volume-up voice-playing"></i>
+                        <span>Voice explanation is playing...</span>
+                    </div>
+                    <div class="ai-voice-text" id="aiVoiceText">
+                        <!-- Voice explanation text will be inserted here dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Calculator Info Modal -->
+    <div class="calculator-info-modal" id="calculatorInfoModal">
+        <div class="calculator-info-content">
+            <div class="calculator-info-header">
+                <h3>How the Biodiversity Impact Calculator Works</h3>
+                <button class="close-calculator-info" id="closeCalculatorInfo">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="calculator-info-body">
+                <div class="info-content">
+                    <div class="info-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h5>Input Your Data</h5>
+                            <p>Enter the forest area lost in hectares, number of species lost, and pollution level (1-10 scale).</p>
+                        </div>
+                    </div>
+                    <div class="info-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h5>Calculation Process</h5>
+                            <p>The calculator uses scientific formulas to estimate environmental impacts based on your inputs:</p>
+                            <ul>
+                                <li><strong>CO2 Absorption:</strong> Forests absorb approximately 6 tons of CO2 per hectare annually</li>
+                                <li><strong>Economic Cost:</strong> Based on ecosystem service valuation and species extinction costs</li>
+                                <li><strong>Recovery Time:</strong> Calculated based on ecosystem complexity and damage severity</li>
+                                <li><strong>Ecosystem Health:</strong> Assessed through biodiversity metrics and pollution impact</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="info-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h5>Interpret Results</h5>
+                            <p>Understand what the numbers mean for environmental sustainability and human wellbeing.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-note">
+                    <p><strong>Note:</strong> This calculator provides estimates based on scientific models. Actual impacts may vary based on specific ecosystem characteristics and local conditions.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Save Results Modal -->
+    <div class="save-results-modal" id="saveResultsModal">
+        <div class="save-results-content">
+            <div class="save-results-header">
+                <h3>Your Quiz Results</h3>
+                <button class="close-save-modal" id="closeSaveModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="save-results-body">
+                <div class="saveable-results" id="saveableResults">
+                    <!-- Saveable results content will be inserted here dynamically -->
+                </div>
+                <div class="save-actions">
+                    <button class="save-btn" id="saveResults">
+                        <i class="fas fa-download"></i> Save Results
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Species Modal -->
+    <div class="species-modal" id="speciesModal">
+        <div class="species-modal-content">
+            <div class="species-modal-header">
+                <h3 id="modalSpeciesName">Species Name</h3>
+                <button class="close-species-modal" id="closeSpeciesModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="species-modal-body">
+                <div class="species-modal-image" id="modalSpeciesImage"></div>
+                <div class="species-modal-info">
+                    <h4>About This Species</h4>
+                    <p id="modalSpeciesDescription"></p>
+
+                    <div class="species-fact">
+                        <strong>Conservation Status:</strong> <span id="modalSpeciesStatus"></span>
+                    </div>
+                    <div class="species-fact">
+                        <strong>Population Trend:</strong> <span id="modalSpeciesTrend"></span>
+                    </div>
+                    <div class="species-fact">
+                        <strong>Major Threats:</strong> <span id="modalSpeciesThreats"></span>
+                    </div>
+                    <div class="species-fact">
+                        <strong>Conservation Efforts:</strong> <span id="modalSpeciesEfforts"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-content">
+            <div class="video-modal-header">
+                <h3 id="videoModalTitle">Video Title</h3>
+                <button class="close-video-modal" id="closeVideoModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="video-modal-body">
+                <iframe id="videoFrame" src="" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-top">
+                    <div class="logo">
+                        <i class="fas fa-leaf"></i>
+                        <span>Biodiversity & Society</span>
+                    </div>
+                    <button class="mobile-menu" id="mobileMenu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="header-actions">
+                        <div class="search-container">
+                            <button class="search-toggle">
+                                <i class="fas fa-search"></i>
+                            </button>
+                            <div class="search-bar">
+                                <i class="fas fa-search search-icon"></i>
+                                <input type="text" class="search-input" placeholder="Search..." />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <nav class="nav-menu" id="navMenu">
+                    <ul>
+                        <li><a href="#home" class="active">Home</a></li>
+                        <li><a href="#key-facts">Key Facts</a></li>
+                        <li><a href="#overview">Overview</a></li>
+                        <li><a href="#threats">Threats</a></li>
+                        <li><a href="#impact">Impact</a></li>
+                        <li><a href="#health">Health Issues</a></li>
+                        <li><a href="#technology">Technology</a></li>
+                        <li><a href="#sts">STS Connection</a></li>
+                        <li><a href="#videos">Video Resources</a></li>
+                        <li><a href="#quiz">Quiz</a></li>
+                        <li><a href="#editorial-staff">Our Team</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section - Home Page Cover -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Threats to Biodiversity & The Healthy Society</h1>
+                <div class="tagline">Exploring the Intersection of Science, Technology, and Society</div>
+                <p>Biodiversity loss represents one of the most critical challenges of our time, with profound implications for human health, economic stability, and social well-being. This website explores how science and technology can help address these challenges while considering societal dimensions.</p>
+                <div class="btn-container">
+                    <a href="#key-facts" class="btn">Explore the Facts</a>
+                    <a href="#videos" class="btn btn-outline">Watch Videos</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Facts Section -->
+    <section class="key-facts" id="key-facts">
+        <div class="container">
+            <div class="section-title">
+                <h2>Key Facts About Biodiversity</h2>
+                <p>Critical statistics that highlight the importance of biodiversity for human health and society</p>
+            </div>
+
+            <!-- Interactive Stats Counter -->
+            <div class="stats-counter">
+                <div class="stat-item">
+                    <div class="stat-number" data-target="75">0</div>
+                    <div class="stat-label">Food Crops Rely on Pollinators</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="50">0</div>
+                    <div class="stat-label">Medicines from Natural Sources</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="80">0</div>
+                    <div class="stat-label">Terrestrial Biodiversity in Forests</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="60">0</div>
+                    <div class="stat-label">Extinctions from Invasive Species</div>
+                </div>
+            </div>
+
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <i class="fas fa-seedling"></i>
+                    <h3>Food Security</h3>
+                    <p>Over 75% of global food crops rely on pollinators, contributing US$ 235–577 billion annually to global agricultural output.</p>
+                </div>
+                <div class="fact-card">
+                    <i class="fas fa-pills"></i>
+                    <h3>Medicine</h3>
+                    <p>Over 50% of modern medicines are derived from natural sources, including antibiotics from fungi and painkillers from plant compounds.</p>
+                </div>
+                <div class="fact-card">
+                    <i class="fas fa-tree"></i>
+                    <h3>Climate Regulation</h3>
+                    <p>Forests store 80% of terrestrial biodiversity, absorbing approximately 2.6 billion tonnes of carbon dioxide annually.</p>
+                </div>
+                <div class="fact-card">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Invasive Species</h3>
+                    <p>Invasive alien species contribute to 60% of species extinctions, causing US$ 423 billion in global economic damage each year.</p>
+                </div>
+                <div class="fact-card">
+                    <i class="fas fa-tint"></i>
+                    <h3>Freshwater Resources</h3>
+                    <p>Healthy ecosystems provide 75% of global freshwater resources. Since 1970, 35% of wetlands have been lost.</p>
+                </div>
+                <div class="fact-card">
+                    <i class="fas fa-globe-americas"></i>
+                    <h3>Indigenous Stewardship</h3>
+                    <p>Indigenous Peoples manage over 38 million km² of land globally, including nearly 40% of all protected areas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section class="overview" id="overview">
+        <div class="container">
+            <div class="section-title">
+                <h2>Biodiversity Overview</h2>
+                <p>Understanding the foundation of all life on Earth</p>
+            </div>
+
+            <!-- Interactive Ecosystem Visualization -->
+            <div class="ecosystem-visualization">
+                <h3 class="visualization-title">Interactive Ecosystem Visualization</h3>
+                <div class="ecosystem-container">
+                    <div class="ecosystem-canvas-container">
+                        <canvas id="ecosystemCanvas"></canvas>
+                    </div>
+                    <div class="ecosystem-controls">
+                        <button class="ecosystem-btn" id="addSpecies">
+                            <i class="fas fa-plus"></i> Add Species
+                        </button>
+                        <button class="ecosystem-btn" id="removeSpecies">
+                            <i class="fas fa-minus"></i> Remove Species
+                        </button>
+                        <button class="ecosystem-btn" id="simulateThreat">
+                            <i class="fas fa-bolt"></i> Simulate Threat
+                        </button>
+                        <button class="ecosystem-btn" id="resetEcosystem">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+                <div class="ecosystem-info">
+                    <p>This interactive visualization demonstrates how species interact in an ecosystem. Add species to see how biodiversity increases ecosystem resilience. Simulate threats to observe how biodiversity loss affects the entire system.</p>
+                </div>
+            </div>
+
+            <div class="overview-content">
+                <div class="overview-text">
+                    <h3>The Web of Life</h3>
+                    <p>Biodiversity, the variability among living organisms from all sources, underpins all life on Earth. This includes diversity within species, between species and across ecosystems, representing the genetic makeup of plants, animals, microorganisms and the complexity of ecosystems.</p>
+                    <p>Healthy communities are sustained by well-functioning ecosystems, which provide critical services such as clean air, fresh water, natural medicines and food security. These ecosystems also regulate diseases and help stabilize the climate.</p>
+                    <p>However, biodiversity loss is accelerating at an unprecedented rate, with approximately 1 million species at risk of extinction, threatening these vital services and exacerbating public health risks globally.</p>
+                </div>
+                <div class="overview-image">
+                    <img src="images/biodiversity-ecosystem.jpg" alt="Biodiversity Ecosystem" />
+                </div>
+            </div>
+
+            <!-- Visual Aid: Biodiversity Pyramid -->
+            <div class="biodiversity-pyramid">
+                <h3 class="pyramid-title">The Biodiversity Pyramid</h3>
+                <div class="pyramid-levels">
+                    <div class="pyramid-level">
+                        <i class="fas fa-dna level-icon"></i>
+                        <div class="level-content">
+                            <h4>Genetic Diversity</h4>
+                            <p>Variation of genes within a species, enabling adaptation to changing environments.</p>
+                        </div>
+                    </div>
+                    <div class="pyramid-level">
+                        <i class="fas fa-paw level-icon"></i>
+                        <div class="level-content">
+                            <h4>Species Diversity</h4>
+                            <p>Variety of species within a habitat or region, forming the building blocks of ecosystems.</p>
+                        </div>
+                    </div>
+                    <div class="pyramid-level">
+                        <i class="fas fa-tree level-icon"></i>
+                        <div class="level-content">
+                            <h4>Ecosystem Diversity</h4>
+                            <p>Variety of ecosystems in a given place, each with unique interactions and functions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Threats to Biodiversity Section -->
+    <section class="threats" id="threats">
+        <div class="container">
+            <div class="section-title">
+                <h2>Threats to Biodiversity</h2>
+                <p>Understanding the mounting crisis that threatens all life on Earth</p>
+            </div>
+
+            <!-- Interactive Species Explorer -->
+            <div class="species-explorer">
+                <h3 class="explorer-title">Endangered Species Explorer</h3>
+                <div class="species-grid" id="speciesGrid">
+                    <!-- Species cards will be dynamically generated -->
+                </div>
+            </div>
+
+            <div class="threats-content">
+                <div class="threats-text">
+                    <h3>Our Fragile Web of Life</h3>
+                    <p>Without nature, we are nothing. Yet humans are destroying the environment and the living creatures that call our planet home at unprecedented rates — at our own peril. From increasing the threat of disease to disrupting our global food chain, biodiversity loss across the globe is threatening the very foundation of our future and the well-being of everyone, everywhere.</p>
+
+                    <p>The devastating effects of climate change on human health are already on display: famines triggered by once-in-a-century droughts or flooding; death and suffering wrought by some of the strongest hurricanes and heat waves in modern history.</p>
+
+                    <p>But what is less well known is how biodiversity loss is harming our health and threatening the basic ecological cycles that keep us alive.</p>
+
+                    <blockquote>
+                        "Humanity has become a weapon of mass extinction. ... And ultimately, we are committing suicide by proxy."
+                        <cite>— UN Secretary-General António Guterres</cite>
+                    </blockquote>
+
+                    <p>One reporter called biodiversity loss a "mounting under-the-radar crisis," and disturbing signs are appearing all over the globe, from beaches awash in sargassum seaweed to massive fish die-offs in polluted waterways. In fact, according to the United Nations Environment Programme, biodiversity is declining faster than at any other time in human history. Right now more than 1 million species are facing extinction.</p>
+                </div>
+                <div class="threats-image">
+                    <img src="images/threats-biodiversity.jpg" alt="Threats to Biodiversity" />
+                </div>
+            </div>
+
+            <div class="threats-grid">
+                <div class="threat-card">
+                    <div class="threat-icon">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <h3>Habitat Destruction</h3>
+                    <p>One-third of the planet's land is now degraded, making it harder to feed our growing global population. Forests, wetlands, and other critical ecosystems are being cleared at alarming rates.</p>
+                </div>
+                <div class="threat-card">
+                    <div class="threat-icon">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h3>Unsustainable Practices</h3>
+                    <p>Industrial practices like oil drilling, fracking, mining, and factory farming are destroying ecosystems while displacing, contaminating, and killing countless species.</p>
+                </div>
+                <div class="threat-card">
+                    <div class="threat-icon">
+                        <i class="fas fa-fish"></i>
+                    </div>
+                    <h3>Overexploitation</h3>
+                    <p>Overfishing, illegal wildlife trade, and unsustainable harvesting are pushing many species to the brink of extinction and disrupting delicate ecological balances.</p>
+                </div>
+                <div class="threat-card">
+                    <div class="threat-icon">
+                        <i class="fas fa-temperature-high"></i>
+                    </div>
+                    <h3>Climate Change</h3>
+                    <p>Rising temperatures, ocean acidification, and extreme weather events are disrupting ecosystems and threatening species that cannot adapt quickly enough.</p>
+                </div>
+                <div class="threat-card">
+                    <div class="threat-icon">
+                        <i class="fas fa-virus"></i>
+                    </div>
+                    <h3>Zoonotic Spillover</h3>
+                    <p>Habitat destruction brings humans and wildlife into closer contact, dramatically increasing our risk of exposure to pathogens that jump from animals to humans.</p>
+                </div>
+                <div class="threat-card">
+                    <div class="threat-icon">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                    <h3>Pollution</h3>
+                    <p>Plastic pollution, chemical runoff, and air pollution are poisoning our land, water, and air, harming both wildlife and human health.</p>
+                </div>
+            </div>
+
+            <!-- Interactive Impact Calculator -->
+            <div class="impact-calculator">
+                <h3 class="calculator-title">Biodiversity Impact Calculator</h3>
+                <div class="calculator-container">
+                    <div class="calculator-inputs">
+                        <div class="calculator-input-group">
+                            <label for="forestArea">Forest Area Lost (hectares)</label>
+                            <input type="number" id="forestArea" class="calculator-input" value="1000" min="0" />
+                        </div>
+                        <div class="calculator-input-group">
+                            <label for="speciesLost">Species Lost</label>
+                            <input type="number" id="speciesLost" class="calculator-input" value="5" min="0" />
+                        </div>
+                        <div class="calculator-input-group">
+                            <label for="pollutionLevel">Pollution Level (1-10)</label>
+                            <input type="range" id="pollutionLevel" class="calculator-input" min="1" max="10" value="5" />
+                        </div>
+                        <button class="calculate-btn" id="calculateImpact">Calculate Impact</button>
+                        <button class="calculator-info-btn" id="calculatorInfoBtn">
+                            <i class="fas fa-info-circle"></i> How This Calculator Works
+                        </button>
+                    </div>
+                    <div class="calculator-results">
+                        <h4>Environmental Impact</h4>
+                        <div class="result-item">
+                            <span class="result-label">CO2 Absorption Lost:</span>
+                            <span class="result-value" id="co2Result">0 tons/year</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Economic Cost:</span>
+                            <span class="result-value" id="economicResult">$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Recovery Time:</span>
+                            <span class="result-value" id="recoveryResult">0 years</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Ecosystem Health:</span>
+                            <span class="result-value" id="healthResult">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visual Aid: Threat Timeline -->
+            <div class="threat-timeline">
+                <h3 class="timeline-title">Global Biodiversity Protection Timeline</h3>
+
+                <!-- Timeline Overview -->
+                <div class="timeline-overview">
+                    <div class="overview-content">
+                        <div class="overview-item">
+                            <div class="overview-year">2025</div>
+                            <div class="overview-text">COP16 biodiversity negotiations</div>
+                        </div>
+                        <div class="overview-item">
+                            <div class="overview-year">2024</div>
+                            <div class="overview-text">Nature restoration law & COP16 preparations</div>
+                        </div>
+                        <div class="overview-item">
+                            <div class="overview-year">2023</div>
+                            <div class="overview-text">Nature restoration agreements</div>
+                        </div>
+                        <div class="overview-item">
+                            <div class="overview-year">2022</div>
+                            <div class="overview-text">COP15 & Kunming-Montreal framework</div>
+                        </div>
+                        <div class="overview-item">
+                            <div class="overview-year">2020-2021</div>
+                            <div class="overview-text">EU Biodiversity Strategy 2030</div>
+                        </div>
+                        <div class="overview-item">
+                            <div class="overview-year">2010-2019</div>
+                            <div class="overview-text">Mid-term reviews & strategy development</div>
+                        </div>
+                        <div class="overview-item">
+                            <div class="overview-year">2000-2009</div>
+                            <div class="overview-text">Early biodiversity policy development</div>
+                        </div>
+                    </div>
+                    <button class="expand-timeline-btn">
+                        <span>View Full Timeline</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+
+                <!-- Full Timeline (Initially Hidden) -->
+                <div class="full-timeline" id="fullTimeline">
+                    <div class="timeline">
+                        <!-- 2025 -->
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h4>28 February 2025</h4>
+                                <p>Positive outcome of COP16 biodiversity negotiations. A follow-up meeting resulted in adoption of strategy for resource mobilisation and enhanced monitoring framework.</p>
+                                <a href="https://environment.ec.europa.eu/news/eu-welcomes-positive-cop16-biodiversity-negotiations-outcome-2025-02-28_en" target="_blank" class="timeline-link">EU welcomes positive outcome of COP16 biodiversity negotiations in Rome</a>
+                            </div>
+                        </div>
+
+                        <!-- 2024 -->
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h4>14 October 2024</h4>
+                                <p>UN biodiversity convention: EU reaffirms global pledge to protect a third of the planet by 2030. Council approved conclusions for COP16 negotiations.</p>
+                                <a href="https://www.consilium.europa.eu/en/press/press-releases/2024/10/14/un-biodiversity-convention-eu-reaffirms-global-pledge-to-protect-a-third-of-the-planet-by-2030/" target="_blank" class="timeline-link">UN biodiversity convention: EU reaffirms global pledge to protect a third of the planet by 2030</a>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h4>17 June 2024</h4>
+                                <p>Council gives final green light to nature restoration law, aiming to restore at least 20% of EU's land and sea areas by 2030.</p>
+                                <a href="https://www.consilium.europa.eu/en/press/press-releases/2024/06/17/nature-restoration-law-council-gives-final-green-light/" target="_blank" class="timeline-link">Nature restoration law: Council gives final green light</a>
+                            </div>
+                        </div>
+
+                        <!-- 2023 -->
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h4>9 November 2023</h4>
+                                <p>Council and Parliament reach agreement on new rules to restore and preserve degraded habitats in the EU.</p>
+                                <a href="https://www.consilium.europa.eu/en/press/press-releases/2023/11/09/nature-restoration-council-and-parliament-reach-agreement-on-new-rules-to-restore-and-preserve-degraded-habitats-in-the-eu/" target="_blank" class="timeline-link">Nature restoration: Council and Parliament reach agreement on new rules</a>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h4>20 June 2023</h4>
+                                <p>Council reaches agreement on the nature restoration law, setting specific legally binding targets for nature restoration.</p>
+                                <a href="https://www.consilium.europa.eu/en/press/press-releases/2023/06/20/council-reaches-agreement-on-the-nature-restoration-law/" target="_blank" class="timeline-link">Council reaches agreement on the nature restoration law</a>
+                            </div>
+                        </div>
+
+                        <!-- 2022 -->
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h4>20 December 2022</h4>
+                                <p>Restoring nature: ministers discuss 2030 targets and held policy debate on nature restoration regulation.</p>
+                                <a href="https://www.consilium.europa.eu/en/meetings/env/2022/12/20/" target="_blank" class="timeline-link">Environment Council, 20 December 2022</a>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h4>7-19 December 2022</h4>
+                                <p>New global framework for biodiversity adopted at UN summit COP15 with historic Kunming-Montreal global biodiversity framework.</p>
+                                <a href="https://environment.ec.europa.eu/topics/nature-and-biodiversity/global-biodiversity_en" target="_blank" class="timeline-link">EU at COP15 (European Commission)</a>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h4>29 November 2022</h4>
+                                <p>EU and ACP countries call for ambitious agreement to protect biodiversity at COP15 meeting.</p>
+                                <a href="https://www.consilium.europa.eu/en/press/press-releases/2022/11/29/cop15-the-european-union-and-the-organisation-of-african-caribbean-and-pacific-states-call-for-an-ambitious-global-agreement/" target="_blank" class="timeline-link">COP15: EU and OACPS call for ambitious global agreement</a>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h4>24 October 2022</h4>
+                                <p>Council agrees on EU position for UN biodiversity summit, calling for ambitious global biodiversity framework.</p>
+                                <a href="https://www.consilium.europa.eu/en/meetings/env/2022/10/24/" target="_blank" class="timeline-link">Environment Council, 24 October 2022</a>
+                            </div>
+                        </div>
+
+                        <!-- 2021 -->
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h4>16 March 2021</h4>
+                                <p>LIFE programme – Council adopts its position at first reading for 2021-2027, EU's flagship programme for nature and biodiversity protection.</p>
+                                <a href="https://www.consilium.europa.eu/en/press/press-releases/2021/03/16/life-programme-council-adopts-its-position-at-first-reading/" target="_blank" class="timeline-link">LIFE programme – Council adopts its position at first reading</a>
+                            </div>
+                        </div>
+
+                        <!-- 2020 -->
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h4>17 December 2020</h4>
+                                <p>LIFE programme: Council presidency reaches provisional political agreement with Parliament on extension beyond 2020.</p>
+                                <a href="https://www.consilium.europa.eu/en/press/press-releases/2020/12/17/life-programme-council-presidency-reaches-provisional-political-agreement-with-parliament/" target="_blank" class="timeline-link">LIFE programme – Council Presidency reaches provisional agreement</a>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h4>23 October 2020</h4>
+                                <p>Council adopts conclusions on the EU biodiversity strategy for 2030, endorsing objectives and recognising need to step up efforts.</p>
+                                <a href="https://www.consilium.europa.eu/en/press/press-releases/2020/10/23/council-adopts-conclusions-on-the-eu-biodiversity-strategy-for-2030/" target="_blank" class="timeline-link">Council adopts conclusions on EU biodiversity strategy for 2030</a>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h4>21 September 2020</h4>
+                                <p>UN Biodiversity Summit: Council sends united signal to step up global ambition for biodiversity, endorsing Leaders' Pledge for Nature.</p>
+                                <div class="multiple-links">
+                                    <a href="https://www.consilium.europa.eu/en/press/press-releases/2020/09/21/un-biodiversity-summit-council-sends-a-united-signal-to-step-up-global-ambition-for-biodiversity/" target="_blank" class="timeline-link">UN Biodiversity Summit: Council sends united signal</a>
+                                    <a href="https://www.un.org/pga/75/united-nations-summit-on-biodiversity/" target="_blank" class="timeline-link">UN Summit on Biodiversity</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h4>8 June 2020</h4>
+                                <p>EU agriculture ministers welcome Commission's biodiversity strategy as part of European Green Deal.</p>
+                                <div class="multiple-links">
+                                    <a href="https://www.consilium.europa.eu/en/meetings/agrifish/2020/06/08/" target="_blank" class="timeline-link">Video conference of agriculture ministers</a>
+                                    <a href="https://www.consilium.europa.eu/en/policies/european-green-deal/" target="_blank" class="timeline-link">European Green Deal</a>
+                                    <a href="https://www.consilium.europa.eu/en/policies/cap-funding-rules-2023-2027/" target="_blank" class="timeline-link">CAP funding rules 2023-2027</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2019 -->
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h4>19 December 2019</h4>
+                                <p>Council adopts conclusions on biodiversity, calling for ambitious 2030 EU biodiversity strategy as central element of European Green Deal.</p>
+                                <a href="https://www.consilium.europa.eu/en/press/press-releases/2019/12/19/biodiversity-council-adopts-conclusions/" target="_blank" class="timeline-link">Biodiversity - Council adopts conclusions</a>
+                            </div>
+                        </div>
+
+                        <!-- 2018 -->
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h4>9 October 2018</h4>
+                                <p>Biodiversity: Council adopts conclusions expressing deep concern about natural resource base and calling for ambitious strategic plan beyond 2020.</p>
+                                <a href="https://www.consilium.europa.eu/en/press/press-releases/2018/10/09/biodiversity-council-adopts-conclusions/" target="_blank" class="timeline-link">Biodiversity: Council adopts conclusions</a>
+                            </div>
+                        </div>
+
+                        <!-- 2016 -->
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h4>17 October 2016</h4>
+                                <p>Conclusions ahead of meeting of parties to Convention on Biological Diversity, stressing need to act at international level to halt biodiversity loss.</p>
+                                <a href="https://www.consilium.europa.eu/en/meetings/env/2016/10/17/" target="_blank" class="timeline-link">Environment Council, 17 October 2016</a>
+                            </div>
+                        </div>
+
+                        <!-- 2015 -->
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h4>16 December 2015</h4>
+                                <p>Conclusions on mid-term review of EU biodiversity strategy, pointing out areas where further work needed to reach targets.</p>
+                                <a href="https://www.consilium.europa.eu/en/meetings/env/2015/12/16/" target="_blank" class="timeline-link">Environment Council, 16 December 2015</a>
+                            </div>
+                        </div>
+
+                        <!-- 2010 -->
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h4>15 March 2010</h4>
+                                <p>EU sets headline target on halting the loss of biodiversity by 2020 and vision for better protection by 2050.</p>
+                                <a href="https://register.consilium.europa.eu/doc/srv?l=EN&f=ST%207536%202010%20INIT" target="_blank" class="timeline-link">Council conclusions on EU and global vision for biodiversity</a>
+                            </div>
+                        </div>
+
+                        <!-- 2009 -->
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h4>22 December 2009</h4>
+                                <p>Council adopts conclusions on international biodiversity beyond 2010, highlighting importance of re-energising political momentum.</p>
+                                <a href="https://data.consilium.europa.eu/doc/document/ST%2017785%202009%20INIT/EN/pdf" target="_blank" class="timeline-link">Council conclusions on biodiversity beyond 2010</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="collapse-timeline-btn">
+                        <span>Collapse Timeline</span>
+                        <i class="fas fa-chevron-up"></i>
+                    </button>
+                </div>
+
+                <div class="timeline-source">
+                    <p>Source: <a href="https://www.consilium.europa.eu/en/policies/biodiversity/timeline-biodiversity/" target="_blank">European Council - Timeline of biodiversity policy</a></p>
+                </div>
+            </div>
+
+            <div class="case-study">
+                <div class="case-study-content">
+                    <div class="case-study-image">
+                        <img src="images/amazon-case-study.jpg" alt="Amazon Rainforest" />
+                    </div>
+                    <div class="case-study-text">
+                        <h3>Case Study: The Amazon Rainforest</h3>
+                        <p>There are few places on the planet where the threat of biodiversity loss is more evident than the Amazon, which is being destroyed by record levels of deforestation despite being home to one-third of the planet's species — the greatest concentration of biodiversity on Earth.</p>
+
+                        <p>Because habitat destruction brings humans and wildlife into closer contact, it dramatically increases our risk of exposure to "zoonotic spillover," which occurs when pathogens jump from animals to humans. In fact, more than 75% of emerging infectious diseases in humans are caused by pathogens that originally circulated in animals.</p>
+
+                        <p>Dr. Alessandra Nava, a veterinary scientist based in the Brazilian city of Manaus, has made the rainforest her laboratory. She has dedicated her career to collecting samples from small mammals for the Fiocruz Amazônia Biobank, part of a growing effort to track the spread of zoonotic pathogens, and perhaps ultimately help predict or even prevent another pandemic.</p>
+
+                        <p>Her work exemplifies a holistic approach, fittingly dubbed "One Health," that recognizes the indivisible link between animal, human, and environmental well-being.</p>
+
+                        <blockquote>
+                            "When we keep the forest intact, it serves as a buffer zone."
+                            <cite>— Dr. Alessandra Nava, Veterinary Scientist</cite>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+
+            <div class="solutions-preview">
+                <h3>Solutions to Protect Biodiversity</h3>
+                <p>Despite these challenges, solutions exist to restore and preserve our planet's ecological well-being:</p>
+                <ul>
+                    <li><strong>Protecting and restoring natural habitats:</strong> Conservation is key to maintaining the delicate balance of our ecosystems.</li>
+                    <li><strong>Prioritizing island nations:</strong> Islands host 20% of Earth's species despite covering less than 4% of its surface.</li>
+                    <li><strong>Supporting sustainable practices:</strong> From agriculture to fishing to land use, we need approaches that work with nature.</li>
+                    <li><strong>Respecting Indigenous knowledge:</strong> Indigenous communities have long served as the planet's most effective environmental stewards.</li>
+                </ul>
+
+                <div class="cta-mini">
+                    <p>"Without nature, we have nothing. Without nature, we are nothing." — UN Secretary-General António Guterres</p>
+                    <a href="#sts" class="btn">Learn How STS Can Help</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="impact" id="impact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Impact of Biodiversity Loss</h2>
+                <p>How biodiversity decline affects human health, economies, and societies</p>
+            </div>
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <div class="impact-image">
+                        <img src="images/health-impact.jpg" alt="Health Impact" />
+                    </div>
+                    <div class="impact-text">
+                        <h3>Health Impacts</h3>
+                        <p>Human health relies on ecosystem resources, products and services. Biodiversity loss can have significant direct health impacts if ecosystem services no longer meet societal needs.</p>
+                    </div>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-image">
+                        <img src="images/economic-impact.jpg" alt="Economic Impact" />
+                    </div>
+                    <div class="impact-text">
+                        <h3>Economic Consequences</h3>
+                        <p>The global economic impact of biodiversity loss amounts to US$ 10 trillion annually, including healthcare costs from increased disease transmission and agricultural losses.</p>
+                    </div>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-image">
+                        <img src="images/social-impact.jpg" alt="Social Impact" />
+                    </div>
+                    <div class="impact-text">
+                        <h3>Social Disruption</h3>
+                        <p>Changes in ecosystems can affect livelihoods, income, local migration and may even cause or increase political conflict.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Health Issues Section -->
+    <section class="health-issues" id="health">
+        <div class="container">
+            <div class="section-title">
+                <h2>Global Health Issues & Biodiversity</h2>
+                <p>How biodiversity loss contributes to major health challenges</p>
+            </div>
+            <div class="health-grid">
+                <div class="health-card">
+                    <h3><i class="fas fa-lungs-virus"></i> Long COVID</h3>
+                    <p>The health impact of long COVID often disrupts a person's ability to engage with school, work, or relationships for months at a time. People with long COVID need diagnostic and proper rehabilitation support.</p>
+                </div>
+                <div class="health-card">
+                    <h3><i class="fas fa-heartbeat"></i> Cardiovascular Disease</h3>
+                    <p>Cardiovascular diseases are the leading causes of death globally, accounting for 28% of total deaths in 2021. Most can be prevented by addressing modifiable risk factors such as high blood pressure, obesity, and air pollution.</p>
+                </div>
+                <div class="health-card">
+                    <h3><i class="fas fa-lungs"></i> Lower Respiratory Infections</h3>
+                    <p>Lower respiratory infections, such as pneumonia and bronchitis, affect the lungs and breathing passages. These infections can be severe, especially for vulnerable populations.</p>
+                </div>
+                <div class="health-card">
+                    <h3><i class="fas fa-virus"></i> HIV/AIDS</h3>
+                    <p>HIV, the virus that causes AIDS, has become one of the world's most serious health challenges since the first cases were reported in 1981. Approximately 86 million people have become infected with HIV since the start of the epidemic.</p>
+                </div>
+                <div class="health-card">
+                    <h3><i class="fas fa-mosquito"></i> Infectious Diseases</h3>
+                    <p>Over 75% of emerging infectious diseases are zoonotic and often arise in areas where ecosystems have been disrupted by deforestation or land-use change.</p>
+                </div>
+                <div class="health-card">
+                    <h3><i class="fas fa-thermometer-full"></i> Climate-Related Health Risks</h3>
+                    <p>The destruction of ecosystems accelerates climate change, leading to increased heatwaves, floods, and other climate-related health risks, including heat-stress and malnutrition.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section class="technology" id="technology">
+        <div class="container">
+            <div class="section-title">
+                <h2>Technological Advancements in Health Care</h2>
+                <p>How technology is revolutionizing healthcare and biodiversity conservation</p>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-image">
+                        <img src="images/wearable-tech.jpg" alt="Wearable Technology" />
+                    </div>
+                    <div class="tech-text">
+                        <h3>Wearable Health Technology</h3>
+                        <p>Wearables provide continuous monitoring, early detection, and personalized treatment, helping reduce healthcare costs while improving outcomes.</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-image">
+                        <img src="images/telemedicine.jpg" alt="Telemedicine" />
+                    </div>
+                    <div class="tech-text">
+                        <h3>Telemedicine</h3>
+                        <p>Telemedicine enables virtual communication between patients and physicians, eliminating the need for patients to travel to clinics while maintaining quality care.</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-image">
+                        <img src="images/robotic-surgery.jpg" alt="Robotic Surgery" />
+                    </div>
+                    <div class="tech-text">
+                        <h3>Robotic Surgical Systems</h3>
+                        <p>Robotic surgery helps doctors perform complex operations with more accuracy, flexibility, and control than traditional methods.</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-image">
+                        <img src="images/mrna-tech.jpg" alt="mRNA Technology" />
+                    </div>
+                    <div class="tech-text">
+                        <h3>mRNA Technology</h3>
+                        <p>mRNA technology holds promise for treating various diseases, including cancer and genetic disorders, building on its success with COVID-19 vaccines.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STS Connection Section -->
+    <section class="sts-connection" id="sts">
+        <div class="container">
+            <div class="section-title">
+                <h2>The STS Connection</h2>
+                <p>How Science, Technology, and Society intersect in addressing biodiversity threats</p>
+            </div>
+            <div class="sts-content">
+                <div class="sts-text">
+                    <h3>An Integrated Approach to Biodiversity Conservation</h3>
+                    <p>In today's interconnected world, the dynamic relationship between science, technology, and health is at the forefront of societal progress. Advancements in science and technology have revolutionized healthcare, leading to breakthroughs in treatment, diagnosis, and prevention of diseases.</p>
+                    <p>The relationship between biodiversity and human society is complex and bidirectional. While human activities drive biodiversity loss, the resulting ecological degradation threatens human health, food security, and social stability.</p>
+                    <p>Science provides the evidence base for understanding these threats, technology offers tools for monitoring and mitigation, while society determines the values, policies, and behaviors that shape our relationship with nature.</p>
+                    <p>It's important that we work together across different areas, like science and ethics, and make fair rules so that everyone can benefit from these new ideas in science, technology, and health.</p>
+                </div>
+                <div class="sts-image">
+                    <img src="images/sts-connection.jpg" alt="Science, Technology, Society Connection" />
+                </div>
+            </div>
+
+            <!-- Visual Aid: STS Interconnection Diagram -->
+            <div class="sts-diagram">
+                <h3 class="diagram-title">The STS Interconnection</h3>
+                <div class="diagram-container">
+                    <div class="diagram-element">
+                        <div class="element-icon">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <h4>Science</h4>
+                        <p>Provides evidence-based understanding of biodiversity threats and impacts</p>
+                    </div>
+                    <div class="diagram-element">
+                        <div class="element-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h4>Technology</h4>
+                        <p>Offers tools for monitoring, mitigation, and conservation solutions</p>
+                    </div>
+                    <div class="diagram-element">
+                        <div class="element-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>Society</h4>
+                        <p>Determines values, policies, and behaviors that shape our relationship with nature</p>
+                    </div>
+                </div>
+                <div class="diagram-connections">
+                    <div class="connection-line"></div>
+                    <div class="connection-line"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Resources Section -->
+    <section class="video-resources" id="videos">
+        <div class="container">
+            <div class="section-title">
+                <h2>Video Resources</h2>
+                <p>Watch these videos to learn more about biodiversity and its importance</p>
+            </div>
+
+            <div class="videos-grid">
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/kHhspf5IfdE/maxresdefault.jpg" alt="Why is biodiversity so important?" />
+                        <div class="video-play-btn" data-video-id="kHhspf5IfdE">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-content">
+                        <h3>Why is biodiversity so important?</h3>
+                        <p>This video explains the importance of biodiversity and how it affects our daily lives, from the air we breathe to the food we eat.</p>
+                        <a href="https://youtu.be/kHhspf5IfdE" target="_blank" class="video-link">
+                            <i class="fas fa-external-link-alt"></i> Watch on YouTube
+                        </a>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/QWLZM38t0YU/maxresdefault.jpg" alt="What is Biodiversity?" />
+                        <div class="video-play-btn" data-video-id="QWLZM38t0YU">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-content">
+                        <h3>What is Biodiversity?</h3>
+                        <p>This video provides a comprehensive overview of biodiversity, including its different levels and why it matters for ecosystem health.</p>
+                        <a href="https://youtu.be/QWLZM38t0YU" target="_blank" class="video-link">
+                            <i class="fas fa-external-link-alt"></i> Watch on YouTube
+                        </a>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/xvnadbj4gwk/maxresdefault.jpg" alt="Human Impacts on Biodiversity" />
+                        <div class="video-play-btn" data-video-id="xvnadbj4gwk">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-content">
+                        <h3>Human Impacts on Biodiversity</h3>
+                        <p>This video explores how human activities are affecting biodiversity worldwide and what we can do to reduce our impact.</p>
+                        <a href="https://youtu.be/xvnadbj4gwk" target="_blank" class="video-link">
+                            <i class="fas fa-external-link-alt"></i> Watch on YouTube
+                        </a>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/1cvMX82iwRM/maxresdefault.jpg" alt="Biodiversity and Ecosystem Services" />
+                        <div class="video-play-btn" data-video-id="1cvMX82iwRM">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-content">
+                        <h3>Biodiversity and Ecosystem Services</h3>
+                        <p>This video explains the concept of ecosystem services and how biodiversity provides essential benefits to humanity.</p>
+                        <a href="https://youtu.be/1cvMX82iwRM" target="_blank" class="video-link">
+                            <i class="fas fa-external-link-alt"></i> Watch on YouTube
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Join the Movement for Biodiversity Conservation</h2>
+            <p>Explore how science, technology, and societal action can work together to address biodiversity threats and create a healthier relationship between humans and nature.</p>
+            <a href="#key-facts" class="btn">Learn More & Get Involved</a>
+        </div>
+    </section>
+
+    <!-- Interactive Quiz Section -->
+    <section class="quiz-section" id="quiz">
+        <div class="container">
+            <div class="section-title">
+                <h2>Test Your Knowledge</h2>
+                <p>Take our interactive quiz to see how much you know about biodiversity and its importance</p>
+            </div>
+
+            <div class="quiz-container">
+                <div class="quiz-intro" id="quizIntro">
+                    <div class="quiz-image">
+                        <img src="images/quiz-image.jpg" alt="Biodiversity Quiz" />
+                    </div>
+                    <div class="quiz-info">
+                        <h3>Biodiversity Quiz Challenge</h3>
+                        <p>This quiz will test your knowledge about biodiversity threats, conservation efforts, and the relationship between ecosystems and human health.</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> 20 multiple-choice questions</li>
+                            <li><i class="fas fa-check-circle"></i> Instant feedback with explanations</li>
+                            <li><i class="fas fa-check-circle"></i> Learn interesting facts about biodiversity</li>
+                            <li><i class="fas fa-check-circle"></i> Get personalized results based on your score</li>
+                            <li><i class="fas fa-random"></i> Questions and choices shuffled each attempt</li>
+                        </ul>
+                        <button class="btn start-quiz-btn" id="startQuiz">Start Quiz</button>
+                    </div>
+                </div>
+
+                <div class="quiz-content" id="quizContent" style="display: none;">
+                    <div class="quiz-header">
+                        <div class="quiz-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                            <span class="progress-text" id="progressText">Question 1 of 20</span>
+                        </div>
+                        <div class="quiz-score">
+                            Score: <span id="scoreValue">0</span>
+                        </div>
+                    </div>
+
+                    <div class="question-container">
+                        <h3 class="question-text" id="questionText"></h3>
+                        <div class="options-container" id="optionsContainer"></div>
+                    </div>
+
+                    <div class="quiz-feedback" id="quizFeedback" style="display: none;">
+                        <div class="feedback-content">
+                            <h4 id="feedbackTitle"></h4>
+                            <p id="feedbackText"></p>
+                            <button class="btn next-question-btn" id="nextQuestion">Next Question</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enhanced Quiz Results with Score-Based Feedback -->
+                <div class="quiz-results" id="quizResults" style="display: none;">
+                    <div class="results-content">
+                        <h3>Quiz Complete!</h3>
+                        <div class="score-circle">
+                            <div class="circle-background"></div>
+                            <div class="circle-content">
+                                <span class="score-percentage" id="scorePercentage">0%</span>
+                                <span class="score-label">Your Score</span>
+                            </div>
+                        </div>
+
+                        <!-- Score-Based Visual Feedback -->
+                        <div class="score-feedback" id="scoreFeedback">
+                            <!-- Content will be dynamically generated based on score -->
+                        </div>
+
+                        <p id="resultsMessage"></p>
+                        <div class="results-actions">
+                            <button class="btn retry-quiz-btn" id="retryQuiz">Try Again</button>
+                            <button class="btn save-results-btn" id="saveResultsBtn">
+                                <i class="fas fa-download"></i> Save Results
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Editorial Staff Section -->
+    <section class="editorial-staff" id="editorial-staff">
+        <div class="container">
+            <div class="section-title">
+                <h2>Web Development Team</h2>
+                <p>Meet the dedicated team behind this educational resource</p>
+            </div>
+            <div class="staff-grid">
+                <div class="staff-card">
+                    <div class="staff-info">
+                        <h3>Espina, Elpidio S.</h3>
+                        <p>Assistant Web Developer</p>
+                    </div>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-info">
+                        <h3>Gatpandan, Kate Lourdes F.</h3>
+                        <p>Web Developer / Researcher</p>
+                    </div>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-info">
+                        <h3>Liwanag, Allanis Murray S.</h3>
+                        <p>Visual Designer</p>
+                    </div>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-info">
+                        <h3>Onari, Ryza Joy M.</h3>
+                        <p>Web Designer</p>
+                    </div>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-info">
+                        <h3>Palomo, Janelle Victoria D.</h3>
+                        <p>Leader</p>
+                    </div>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-info">
+                        <h3>Roxas, Heaven Kay G.</h3>
+                        <p>Visual Designer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About This Project</h3>
+                    <p>An educational resource exploring the connections between biodiversity threats, human society, science, and technology.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Key Sections</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#key-facts">Key Facts</a></li>
+                        <li><a href="#overview">Overview</a></li>
+                        <li><a href="#threats">Threats</a></li>
+                        <li><a href="#impact">Impact</a></li>
+                        <li><a href="#health">Health Issues</a></li>
+                        <li><a href="#technology">Technology</a></li>
+                        <li><a href="#sts">STS Connection</a></li>
+                        <li><a href="#videos">Video Resources</a></li>
+                        <li><a href="#quiz">Interactive Quiz</a></li>
+                        <li><a href="#editorial-staff">Our Team</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Scientific Research</a></li>
+                        <li><a href="#">Technology Solutions</a></li>
+                        <li><a href="#">Policy Frameworks</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Educational Materials</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- References Section in Footer -->
+            <div class="references-footer">
+                <h4>References</h4>
+                <ul>
+                    <li>
+                        <a href="https://share.google/umU3x2ISqWfks5hzF" target="_blank">https://share.google/umU3x2ISqWfks5hzF</a>
+                        <div class="reference-description">Additional resource on biodiversity and health connections</div>
+                    </li>
+                    <li>
+                        <a href="https://share.google/RIRTypaQrN8idwqIJ" target="_blank">https://share.google/RIRTypaQrN8idwqIJ</a>
+                        <div class="reference-description">Research materials on biodiversity threats and solutions</div>
+                    </li>
+                    <li>
+                        <a href="https://www.consilium.europa.eu/en/policies/biodiversity/timeline-biodiversity/" target="_blank">https://www.consilium.europa.eu/en/policies/biodiversity/timeline-biodiversity/</a>
+                        <div class="reference-description">European Council - Timeline of biodiversity policy</div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2025 Biodiversity Threats & Healthy Society | Science, Technology & Society</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Include html2canvas library for save functionality -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
